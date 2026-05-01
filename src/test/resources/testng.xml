@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Quiz Online Regression Suite">
+    <listeners>
+        <listener class-name="common.TestListener"/>
+    </listeners>
+
+    <test name="Login Functional Tests">
+        <classes>
+            <class name="tests.LoginTests"/>
+        </classes>
+    </test>
+
+    <test name="Login UI Tests">
+        <classes>
+            <class name="tests.LoginUITests"/>
+        </classes>
+    </test>
+</suite>
