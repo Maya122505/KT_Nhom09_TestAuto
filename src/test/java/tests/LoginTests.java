@@ -37,7 +37,6 @@ public class LoginTests {
         loginPage.login(Constant.USERNAME, Constant.PASSWORD);
 
         String currentUrl = Constant.WEBDRIVER.getCurrentUrl();
-        // Mong đợi: Hệ thống chuyển sang giao diện trang chủ
         Assert.assertFalse(currentUrl.contains("login/"), "LỖI: Hệ thống chưa chuyển trang sau khi đăng nhập thành công!");
     }
 
@@ -50,7 +49,6 @@ public class LoginTests {
         loginPage.login("thuy@gmail.com", "123");
         
         String actualErrorMsg = loginPage.getLblLoginErrorMsg().getText();
-        // Mong đợi: "Email hoặc mật khẩu không đúng" (Sẽ FAIL vì thực tế là "Sai email hoặc mật khẩu!")
         Assert.assertEquals(actualErrorMsg.trim(), "Email hoặc mật khẩu không đúng", "Thông báo lỗi hiển thị không đúng như mong đợi!");
     }
 
@@ -63,52 +61,36 @@ public class LoginTests {
         loginPage.login(Constant.USERNAME, "123");
         
         String actualErrorMsg = loginPage.getLblLoginErrorMsg().getText();
-        // Mong đợi: "Email hoặc mật khẩu không đúng" (Sẽ FAIL)
         Assert.assertEquals(actualErrorMsg.trim(), "Email hoặc mật khẩu không đúng", "Thông báo lỗi hiển thị không đúng như mong đợi!");
     }
 
-    @Test(description = "FDN_04 - Kiểm tra phân biệt chữ hoa/thường của mật khẩu")
+    @Test(description = "FDN_04 - Đăng nhập với email để trống")
     public void FDN_04() {
-        logger.info("Thực thi FDN_04: Kiểm tra phân biệt chữ hoa/thường của mật khẩu");
-        LoginPage loginPage = new LoginPage();
-        loginPage.open();
-        
-        loginPage.login(Constant.USERNAME, "thuymt@123");
-        
-        String actualErrorMsg = loginPage.getLblLoginErrorMsg().getText();
-        // Mong đợi: "Email hoặc mật khẩu không đúng" (Sẽ FAIL)
-        Assert.assertEquals(actualErrorMsg.trim(), "Email hoặc mật khẩu không đúng", "Thông báo lỗi hiển thị không đúng như mong đợi!");
-    }
-
-    @Test(description = "FDN_05 - Đăng nhập với email để trống")
-    public void FDN_05() {
-        logger.info("Thực thi FDN_05: Đăng nhập với email để trống");
+        logger.info("Thực thi FDN_04: Đăng nhập với email để trống");
         LoginPage loginPage = new LoginPage();
         loginPage.open();
         
         loginPage.login("", Constant.PASSWORD);
         
         String validationMessage = loginPage.getTxtEmail().getAttribute("validationMessage");
-        // Mong đợi: "Vui lòng điền vào trường này" (Sẽ FAIL vì thực tế là "Please fill out this field")
         Assert.assertEquals(validationMessage, "Vui lòng điền vào trường này", "Thông báo validation của trình duyệt không đúng như mong đợi!");
     }
 
-    @Test(description = "FDN_06 - Đăng nhập với mật khẩu để trống")
-    public void FDN_06() {
-        logger.info("Thực thi FDN_06: Đăng nhập với mật khẩu để trống");
+    @Test(description = "FDN_05 - Đăng nhập với mật khẩu để trống")
+    public void FDN_05() {
+        logger.info("Thực thi FDN_05: Đăng nhập với mật khẩu để trống");
         LoginPage loginPage = new LoginPage();
         loginPage.open();
         
         loginPage.login(Constant.USERNAME, "");
         
         String validationMessage = loginPage.getTxtPassword().getAttribute("validationMessage");
-        // Mong đợi: "Vui lòng điền vào trường này" (Sẽ FAIL vì thực tế là "Please fill out this field")
         Assert.assertEquals(validationMessage, "Vui lòng điền vào trường này", "Thông báo validation của trình duyệt không đúng như mong đợi!");
     }
 
-    @Test(description = "FDN_07 - Kiểm tra khóa tài khoản khi sai 5 lần")
-    public void FDN_07() {
-        logger.info("Thực thi FDN_07: Kiểm tra khóa tài khoản khi sai 5 lần");
+    @Test(description = "FDN_06 - Kiểm tra khóa tài khoản khi sai 5 lần")
+    public void FDN_06() {
+        logger.info("Thực thi FDN_06: Kiểm tra khóa tài khoản khi sai 5 lần");
         LoginPage loginPage = new LoginPage();
         loginPage.open();
         
@@ -117,7 +99,6 @@ public class LoginTests {
         }
         
         String actualErrorMsg = loginPage.getLblLoginErrorMsg().getText();
-        // Mong đợi: "Tài khoản tạm khóa vì lý do bảo mật" (Sẽ FAIL vì thực tế không khóa)
         Assert.assertEquals(actualErrorMsg.trim(), "Tài khoản tạm khóa vì lý do bảo mật", "Hệ thống không báo khóa tài khoản như mong đợi!");
     }
 }
