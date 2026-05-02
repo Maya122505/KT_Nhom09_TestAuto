@@ -5,6 +5,12 @@
         <listener class-name="common.TestListener"/>
     </listeners>
 
+    <test name="Home Tests">
+        <classes>
+            <class name="tests.HomeTests"/>
+        </classes>
+    </test>
+
     <test name="Login Functional Tests">
         <classes>
             <class name="tests.LoginTests"/>
@@ -16,4 +22,17 @@
             <class name="tests.LoginUITests"/>
         </classes>
     </test>
+
+    <test name="Thuc Hien De Thi Tests">
+        <classes>
+            <class name="tests.TestThucHienDeThi"/>
+        </classes>
+    </test>
+
+    <test name="Result Tests">
+        <classes>
+            <class name="tests.ResultTests"/>
+        </classes>
+    </test>
+
 </suite>

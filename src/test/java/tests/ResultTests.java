@@ -1,5 +1,6 @@
 package tests;
 
+import common.Constant;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
@@ -8,16 +9,15 @@ import pageobjects.ResultPage;
 
 public class ResultTests {
 
-    WebDriver driver;
     ResultPage resultPage;
 
     @BeforeMethod
     public void setUp(){
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        driver.get("http://localhost:8000/quiz/login/");
+        Constant.WEBDRIVER = new ChromeDriver();
+        Constant.WEBDRIVER.manage().window().maximize();
+        Constant.WEBDRIVER.get("http://localhost:8000/quiz/login/");
 
-        resultPage = new ResultPage(driver);
+        resultPage = new ResultPage(Constant.WEBDRIVER);
     }
 
     @Test
@@ -47,8 +47,8 @@ public class ResultTests {
 
     @AfterMethod
     public void tearDown(){
-        if(driver != null){
-            driver.quit();
+        if(Constant.WEBDRIVER != null){
+            Constant.WEBDRIVER.quit();
         }
     }
 }

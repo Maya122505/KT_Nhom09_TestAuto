@@ -1,5 +1,6 @@
 package tests;
 
+import common.Constant;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
@@ -8,16 +9,15 @@ import pageobjects.HomePage;
 
 public class HomeTests {
 
-    WebDriver driver;
     HomePage homePage;
 
     @BeforeMethod
     public void setUp(){
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        driver.get("http://localhost:8000/quiz/login/");
+        Constant.WEBDRIVER = new ChromeDriver();
+        Constant.WEBDRIVER.manage().window().maximize();
+        Constant.WEBDRIVER.get("http://localhost:8000/quiz/login/");
 
-        homePage = new HomePage(driver);
+        homePage = new HomePage(Constant.WEBDRIVER);
         homePage.login("luynh@gmail.com", "123");
     }
 
@@ -75,8 +75,8 @@ public class HomeTests {
 
     @Test
     public void testFUNC_07_KhongCoDeThi(){
-        driver.get("http://localhost:8000/quiz/login/");
-        homePage = new HomePage(driver);
+        Constant.WEBDRIVER.get("http://localhost:8000/quiz/login/");
+        homePage = new HomePage(Constant.WEBDRIVER);
         homePage.login("alo@gmail.com", "123");
 
         Assert.assertTrue(homePage.isThongBaoKhongCoBaiThi());
@@ -94,8 +94,8 @@ public class HomeTests {
 
     @AfterMethod
     public void tearDown(){
-        if(driver != null){
-            driver.quit();
+        if(Constant.WEBDRIVER != null){
+            Constant.WEBDRIVER.quit();
         }
     }
 }

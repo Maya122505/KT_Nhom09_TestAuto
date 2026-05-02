@@ -36,7 +36,8 @@ public class TestListener implements ITestListener {
         System.out.println("\n[ĐANG CHẠY] Test Case: " + result.getName() + " - " + result.getMethod().getDescription());
         // Đảm bảo extent không null trước khi tạo test
         if (extent != null) {
-            ExtentTest extentTest = extent.createTest(result.getMethod().getMethodName(), result.getMethod().getDescription());
+            String description = result.getMethod().getDescription() != null ? result.getMethod().getDescription() : "";
+            ExtentTest extentTest = extent.createTest(result.getName(), description);
             extentTest.assignCategory(result.getTestClass().getName());
             test.set(extentTest);
         }
